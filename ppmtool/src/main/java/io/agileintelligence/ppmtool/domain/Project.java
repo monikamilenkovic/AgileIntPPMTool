@@ -3,12 +3,14 @@ package io.agileintelligence.ppmtool.domain;
 import javax.persistence.*;
 import java.util.Date;
 
+
 @Entity
 public class Project {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String projectName;
     private String projectIdentifier;
     private String description;
