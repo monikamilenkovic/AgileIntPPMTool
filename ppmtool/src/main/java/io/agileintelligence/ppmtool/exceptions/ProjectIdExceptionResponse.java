@@ -1,4 +1,4 @@
-package io.agileintelligence.ppmtool.exceptions;
+package io.agileintelligence.ppmtool;
 
 public class ProjectIdExceptionResponse {
     private String projectIdentifier;
