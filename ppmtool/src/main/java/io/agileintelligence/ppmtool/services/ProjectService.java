@@ -2,6 +2,7 @@ package io.agileintelligence.ppmtool.services;
 
 
 import io.agileintelligence.ppmtool.domain.Project;
+import io.agileintelligence.ppmtool.exceptions.ProjectIdException;
 import io.agileintelligence.ppmtool.repository.ProjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,7 +15,33 @@ public class ProjectService {
 
     public Project saveOrUpdateProject(Project project){
         //Logic
-        return projectRepository.save(project);
+        try{
+            project.setProjectIdentifier(project.getProjectIdentifier().toUpperCase());
+            return projectRepository.save(project);
+        }catch(Exception e){
+            throw new ProjectIdException("Project ID: "+ project.getProjectIdentifier().toUpperCase()+ " already exists");
+        }
+
+    }
+    public Project findProjectByIdentifier(String projectId){
+        Project project = projectRepository.findByProjectIdentifier(projectId.toUpperCase());
+        if(project == null){
+            throw new ProjectIdException("Project ID: "+ projectId.toUpperCase()+ " doesn't exist");
+        }
+        return project;
+    }
+
+    public Iterable<Project> findAllProjects(){ //iterable = kad hocemo da vratimo listu u json formatu, vraca objekat sa json elementima
+        return projectRepository.findAll();
+    }
+
+    public void deleteProjectByIdentifier(String projectId){
+        Project project = projectRepository.findByProjectIdentifier(projectId.toUpperCase());
+        if(project == null){
+            throw new ProjectIdException("Project ID: "+ projectId.toUpperCase()+ " can not be deleted. This project doesn't exist.");
+        }
+        projectRepository.delete(project);
+
     }
 
 }
