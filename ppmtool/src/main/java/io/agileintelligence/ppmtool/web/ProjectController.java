@@ -19,7 +19,7 @@ import java.util.Map;
 
 @RestController
 @RequestMapping("api/project")
-@CrossOrigin
+@CrossOrigin //za pristup iz React-a
 public class ProjectController {
 
     @Autowired
@@ -47,7 +47,7 @@ public class ProjectController {
         Project project1 = projectService.saveOrUpdateProject(project); //ovde se desi greska kad nije unique ID, a ne za validaciju, validacija prodje jer ona samo gleda taj objekat a nema dodira sa bazom
         return new ResponseEntity<Project>(project, HttpStatus.CREATED);
     }
-    @GetMapping("/{projectId}")
+    @GetMapping("/{projectId}")  //"api/project/{id}" je to, kad preuzmemo taj id, saljemo ga do servisa i onda obradjujemo
     public ResponseEntity<?> getProjectById(@PathVariable String projectId){
 
         Project project = projectService.findProjectByIdentifier(projectId);

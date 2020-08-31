@@ -37,7 +37,7 @@ public class ProjectService {
         return project;
     }
 
-    public Iterable<Project> findAllProjects(){
+    public Iterable<Project> findAllProjects(){  //iterable = kad hocemo da vratimo listu u json formatu, vraca objekat sa json elementima
         return projectRepository.findAll();
     }
 
