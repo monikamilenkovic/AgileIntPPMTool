@@ -6,7 +6,7 @@ import Header from "./components/Layout/Header";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import AddProject from "./components/Project/AddProject";
-import { Provider } from "react-redux";
+import { Provider } from "react-redux"; //sluzi za spajanje react-a i redux-a, provider je ono kako definisemo Store i sve se okruzi sa <Provider> tagom
 import store from "./store";
 
 function App() {
