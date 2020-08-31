@@ -1,6 +1,6 @@
 import { GET_ERRORS } from "../actions/types";
 
-const initialState = {};
+const initialState = {}; //pocetno stanje reducera
 
 export default function (state = initialState, action) {
   switch (action.type) {
