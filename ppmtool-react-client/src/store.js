@@ -3,7 +3,7 @@ import thunk from "redux-thunk";
 import rootReducer from "./reducers1"; //dolazi iz combineReducers a tu se nalaze svi Reduceri
 
 const initialState = {}; //inicijalno stanje aplikacije
-const middleware = [thunk]; //ovako je video da se radi
+const middleware = [thunk];
 
 let store;
 
