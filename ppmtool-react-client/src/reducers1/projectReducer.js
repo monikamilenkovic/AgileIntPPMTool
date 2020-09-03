@@ -1,4 +1,4 @@
-import { GET_PROJECTS, GET_PROJECT } from "../actions/types";
+import { GET_PROJECTS, GET_PROJECT, DELETE_PROJECT } from "../actions/types";
 
 const initialState = {
   projects: [], //niz projekata
@@ -16,6 +16,14 @@ export default function (state = initialState, action) {
       return {
         ...state,
         project: action.payload, //dispatch project from the project actions to the store
+      };
+    case DELETE_PROJECT:
+      return {
+        ...state,
+        projects: state.projects.filter(
+          (project) => project.projectIdentifier !== action.payload
+        ), //ovo sluzi da ne bismo morali da refreshujemo stranicu kako bi se obrisao neki element vec on menja stanje dinamicki direktno i ne ide do baze ponovo
+        //iz liste projekata nadji onaj projekat sa odredjenim idjem iz action.payload-a
       };
     default:
       return state; //ako nema gresaka vrati stanje u Store

@@ -1,5 +1,5 @@
 import axios from "axios";
-import { GET_ERRORS, GET_PROJECTS, GET_PROJECT } from "./types";
+import { GET_ERRORS, GET_PROJECTS, GET_PROJECT, DELETE_PROJECT } from "./types";
 import errorReducer from "../reducers1/errorReducer";
 import projectReducer from "../reducers1/projectReducer";
 
@@ -8,7 +8,7 @@ import projectReducer from "../reducers1/projectReducer";
 export const createProject = (project, history) => async (dispatch) => {
   //arow function , history nam dozvoljava da redirectujemo kad odemo na submit dugme, odnosno da mozemo da uradimo PUSH na dashboard nakon sto kreiramo projekat
   try {
-    const res = await axios.post("http://localhost:8080/api/project", project);
+    const res = await axios.post("/api/project", project);
     history.push("/dashboard"); //ako se kreira projekat hocemo da se useru prikaze dashboard kako bi se video novi kreirani projekat
     dispatch({
       //ovo saljemo kad se posalje dobar projekat jer hocemo da nam se isprazni polje sa greskama
@@ -25,7 +25,7 @@ export const createProject = (project, history) => async (dispatch) => {
 };
 
 export const getProjects = () => async (dispatch) => {
-  const res = await axios.get("http://localhost:8080/api/project/all");
+  const res = await axios.get("/api/project/all");
   dispatch({
     type: GET_PROJECTS,
     payload: res.data, //podaci iz baze
@@ -34,12 +34,23 @@ export const getProjects = () => async (dispatch) => {
 
 export const getProject = (id, history) => async (dispatch) => {
   try {
-    const res = await axios.get(`http://localhost:8080/api/project/${id}`);
+    const res = await axios.get(`/api/project/${id}`);
     dispatch({
       type: GET_PROJECT,
       payload: res.data,
     });
   } catch (error) {
     history.push("/dashboard");
+  }
+};
+
+export const deleteProject = (id) => async (dispatch) => {
+  if (window.confirm("Are you sure?")) {
+    //nema mogucnosti greske i zato se ona ne rposledjuje jer brisemo samo ono sto imamo
+    await axios.delete(`/api/project/${id}`);
+    dispatch({
+      type: DELETE_PROJECT,
+      payload: id,
+    });
   }
 };
