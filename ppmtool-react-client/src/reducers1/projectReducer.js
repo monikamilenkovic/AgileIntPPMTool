@@ -1,4 +1,4 @@
-import { GET_PROJECTS } from "../actions/types";
+import { GET_PROJECTS, GET_PROJECT } from "../actions/types";
 
 const initialState = {
   projects: [], //niz projekata
@@ -11,6 +11,11 @@ export default function (state = initialState, action) {
       return {
         ...state,
         projects: action.payload, //ovo hocemo do store-a, a dolazi iz projectActions.js(res.data)
+      };
+    case GET_PROJECT:
+      return {
+        ...state,
+        project: action.payload, //dispatch project from the project actions to the store
       };
     default:
       return state; //ako nema gresaka vrati stanje u Store
