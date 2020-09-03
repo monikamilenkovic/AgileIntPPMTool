@@ -8,6 +8,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import AddProject from "./components/Project/AddProject";
 import { Provider } from "react-redux"; //sluzi za spajanje react-a i redux-a, provider je ono kako definisemo Store i sve se okruzi sa <Provider> tagom
 import store from "./store";
+import UpdateProject from "./components/Project/UpdateProject";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Header />
           <Route exact path="/dashboard" component={Dashboard} />
           <Route exact path="/addProject" component={AddProject} />
+          <Route exact path="/updateProject/:id" component={UpdateProject} />
         </div>
       </Router>
     </Provider>
