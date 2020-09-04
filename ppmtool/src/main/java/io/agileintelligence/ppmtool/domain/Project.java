@@ -27,7 +27,7 @@ public class Project {
     @JsonFormat(pattern = "yyyy-mm-dd")
     private Date end_date;
     @JsonFormat(pattern = "yyyy-mm-dd")
-    @Column(updatable = false)
+    @Column(updatable = false) //da bi se ucitavao svaki put kad preuzimamo neki projekat jer se bez ovoga pretvara u null i da ne mozemo da ga menjamo
     private Date created_At;
     @JsonFormat(pattern = "yyyy-mm-dd")
     private Date updated_At;
